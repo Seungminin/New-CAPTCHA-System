@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CAPTCHA Demo</title>
+    <style>
+      .candidates-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .candidate {
+        border: 2px solid #ddd;
+        padding: 5px;
+        cursor: pointer;
+        width: 150px;
+        height: 150px;
+      }
+      .candidate.selected {
+        border-color: #2ecc71;
+      }
+      .candidate img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CAPTCHA Demo</h1>
+    <div id="question-container">
+      <h2>문제 이미지</h2>
+      <!-- 문제 이미지 -->
+      <img id="question-image" alt="문제 이미지" style="max-width: 300px" />
+    </div>
+    <div id="candidates-container" class="candidates-container">
+      <!-- 후보 이미지들이 이곳에 추가됨 -->
+    </div>
+    <button id="verify-btn">정답 확인</button>
+    <div id="result-message"></div>
+
+    <script>
+      const API_BASE = "http://127.0.0.1:5000";
+      let captchaId = null;
+      let selectedIds = new Set();
+
+      async function loadCaptcha() {
+        try {
+          const response = await fetch(`${API_BASE}/captcha/create`);
+          if (!response.ok) throw new Error("CAPTCHA 생성 실패");
+          const data = await response.json();
+          captchaId = data.captcha_id;
+
+          // 수정: 문제 이미지에 data URI 접두어 추가
+          document.getElementById(
+            "question-image"
+          ).src = `data:image/png;base64,${data.question_image}`;
+
+          const container = document.getElementById("candidates-container");
+          container.innerHTML = "";
+
+          data.candidates.forEach((candidate) => {
+            const div = document.createElement("div");
+            div.classList.add("candidate");
+            div.setAttribute("data-id", candidate.id);
+            div.addEventListener("click", function () {
+              const candidateId = this.getAttribute("data-id");
+              if (selectedIds.has(candidateId)) {
+                selectedIds.delete(candidateId);
+                this.classList.remove("selected");
+              } else {
+                selectedIds.add(candidateId);
+                this.classList.add("selected");
+              }
+            });
+            const img = document.createElement("img");
+            // 수정: 후보 이미지에 data URI 접두어 추가
+            img.src = `data:image/png;base64,${candidate.image}`;
+            div.appendChild(img);
+            container.appendChild(div);
+          });
+        } catch (error) {
+          console.error("Error loading CAPTCHA:", error);
+        }
+      }
+
+      async function verifyCaptcha() {
+        if (!captchaId) {
+          alert("캡차가 아직 로드되지 않았습니다.");
+          return;
+        }
+        const payload = {
+          captcha_id: captchaId,
+          selected_ids: Array.from(selectedIds),
+        };
+        try {
+          const response = await fetch(`${API_BASE}/captcha/verify`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          const result = await response.json();
+          document.getElementById("result-message").innerText = result.message;
+          loadCaptcha();
+          selectedIds.clear();
+        } catch (error) {
+          console.error("Error verifying CAPTCHA:", error);
+        }
+      }
+
+      document
+        .getElementById("verify-btn")
+        .addEventListener("click", verifyCaptcha);
+      window.onload = loadCaptcha;
+    </script>
+  </body>
+</html>
