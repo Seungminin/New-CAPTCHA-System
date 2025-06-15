@@ -11,16 +11,16 @@ As shown in the image above:
 - For example, character-based CAPTCHA has been defeated via segmentation and denoising pipelines, and even reCAPTCHA v2 image challenges can be broken using object detection models like YOLOv8.
 - These breakthroughs enable bots to solve CAPTCHA in under 10 seconds at very low costs, posing a significant security threat.
 
-With the increasing sophistication of these automated solvers, a new form of CAPTCHA is required — one that better exploits the **cognitive gap between humans and machines**.
+With the increasing sophistication of these automated solvers, a new form of CAPTCHA is required — one that better exploits the cognitive gap between humans and machines.
 
 ## 🧠 Our Approach
 
-To address this issue, we propose a **Multi-Modal CAPTCHA system** that leverages:
+To address this issue, we propose a Multi-Modal CAPTCHA system that leverages:
 - Visual reasoning
 - Human intuition
 - Real-time interaction
 
-Instead of asking users to simply click or type, our system requires users to **draw** or **highlight** semantic regions (e.g., cloud shapes, dangerous objects), which introduces complexity that is **trivial for humans but difficult for machines**.
+Instead of asking users to simply click or type, our system requires users to draw or highlight semantic regions (e.g., cloud shapes, dangerous objects), which introduces complexity that is trivial for humans but difficult for machines.
 
 Our goal is to develop a CAPTCHA system that:
 - Adapts to various visual prompts
