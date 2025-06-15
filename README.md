@@ -13,7 +13,7 @@ As shown in the image above:
 
 With the increasing sophistication of these automated solvers, a new form of CAPTCHA is required — one that better exploits the cognitive gap between humans and machines.
 
-## 🧠 Our Approach
+## 🔍 Our Approach
 
 To address this issue, we propose a Multi-Modal CAPTCHA system that leverages:
 - Visual reasoning
@@ -27,11 +27,11 @@ Our goal is to develop a CAPTCHA system that:
 - Is resistant to automation attacks
 - Maintains usability and accessibility for real users
   
-## 🧠 Deep Learning Approach
+## 🔍 Deep Learning Approach
 
 To develop a CAPTCHA system that cannot be easily defeated by automated bots, we designed a novel pipeline involving generative and discriminative deep learning models.
 
-### 1️⃣ Image Generation with DCGAN
+### 🔍Image Generation with DCGAN
 
 We employed a **DCGAN (Deep Convolutional GAN)** architecture to generate realistic but ambiguous images. These images are:
 - Visually confirmable by humans.
@@ -40,11 +40,11 @@ We employed a **DCGAN (Deep Convolutional GAN)** architecture to generate realis
 
 ![Generated Samples from DCGAN](./assets/dcgan_samples.png)
 
-> ✅ The goal: Humans can intuitively classify these images, but machines cannot reliably sort or label them.
+>  The goal: Humans can intuitively classify these images, but machines cannot reliably sort or label them.
 
 ---
 
-### 2️⃣ Evaluation using ResNet18 Classifier
+### 🔍Evaluation using ResNet18 Classifier
 
 To validate the effectiveness of our generated CAPTCHA images, we conducted an evaluation using **ResNet18**, a well-known image classification model.
 
@@ -57,7 +57,7 @@ To validate the effectiveness of our generated CAPTCHA images, we conducted an e
 
 This demonstrates that our CAPTCHA system leverages the **cognitive gap between human and machine perception**, successfully degrading model confidence while maintaining human interpretability.
 
-### 2️⃣ Cognitive Illusion-Based CAPTCHA with Diffusion Models
+### 🔍Cognitive Illusion-Based CAPTCHA with Diffusion Models
 
 In addition to GAN-generated visuals, we developed an advanced CAPTCHA mechanism based on **Illusion Diffusion**, a recent variant of Stable Diffusion that leverages perceptual ambiguity to confuse automated recognition systems.
 
@@ -84,7 +84,7 @@ This reinforces our hypothesis that **humans can still intuitively identify the 
 
 ---
 
-### 🧪 Human-in-the-Loop CAPTCHA Example
+### 🔍Human-in-the-Loop CAPTCHA Example
 
 Below is an example from our system where users are asked to **select all images containing erasers**, while the reference image above is based on Illusion Diffusion outputs.
 
@@ -93,13 +93,13 @@ Below is an example from our system where users are asked to **select all images
 This interactive format ensures:
 - High accuracy from genuine human users.
 - Low success rates for automated bots and model-based solvers.
-## 🎨 Multi-Dimensional CAPTCHA: Drawing-Based Interaction
+## 🔍 Multi-Dimensional CAPTCHA: Drawing-Based Interaction
 
 As our third method, we propose a **Multi-Dimensional CAPTCHA** system that challenges users to interact with AI-generated images in a more semantically demanding way — by drawing or highlighting specific objects within the image.
 
 ---
 
-### 🖼️ Image Generation via Stable Diffusion
+### 🔍 Image Generation via Stable Diffusion
 
 We utilize **Stable Diffusion** with carefully designed prompts to synthesize high-quality images featuring specific semantic elements such as:
 - Fluffy clouds
@@ -112,7 +112,7 @@ These prompts allow for the creation of scenes that are rich in content but visu
 
 ---
 
-### 🧠 The Multi-Modal Challenge
+### 🔍 The Multi-Modal Challenge
 
 Users are prompted with tasks like:
 
@@ -129,19 +129,19 @@ On the backend:
 
 ---
 
-### ✅ Security & Effectiveness
+### 🔍Security & Effectiveness
 
 This system is effective because:
 
-- 🔒 **Hard for Bots**: It’s difficult for an automated system to draw the correct region without understanding the prompt and visual content together.
-- 👤 **Easy for Humans**: Humans naturally perceive visual objects and semantic meaning, allowing them to perform the task with ease.
-- 🧪 **Robust Evaluation**: We compare the user-drawn mask with the ground truth mask and compute IoU (Intersection over Union) to determine success.
+-  **Hard for Bots**: It’s difficult for an automated system to draw the correct region without understanding the prompt and visual content together.
+-  **Easy for Humans**: Humans naturally perceive visual objects and semantic meaning, allowing them to perform the task with ease.
+-  **Robust Evaluation**: We compare the user-drawn mask with the ground truth mask and compute IoU (Intersection over Union) to determine success.
 
 ![Final CAPTCHA UI Example](./assets/multidimension_captcha_ui.png)
 
 This **multi-dimensional approach** highlights the cognitive advantage humans have over machines, making our CAPTCHA system not only secure, but also adaptable to real-world semantic reasoning.
 
-## 🧱 System Architecture & API Deployment
+## 🔍 System Architecture & API Deployment
 
 Our CAPTCHA platform is designed to be modular, scalable, and cloud-deployable. The entire system is containerized via **Docker** and structured for deployment on cloud services such as **AWS**. Below is the architecture diagram illustrating the core components and data flow:
 
@@ -149,7 +149,7 @@ Our CAPTCHA platform is designed to be modular, scalable, and cloud-deployable. 
 
 ---
 
-### 🧩 Architecture Breakdown
+### 🔍 Architecture Breakdown
 
 1. **Actor (User/Client)**
    - Initiates a CAPTCHA request by accessing a webpage or submitting an API call.
@@ -184,17 +184,17 @@ Our CAPTCHA platform is designed to be modular, scalable, and cloud-deployable. 
 
 ---
 
-### ☁️ Deployment Plan
+### ☁🔍 Deployment Plan
 
 We have containerized the CAPTCHA system using **Docker** and plan to deploy it using **AWS EC2** or **AWS Lambda with API Gateway**, allowing scalable integration into third-party services.
 
-- ✅ Docker Image: Built & tested
-- ✅ API Integration: `/submit`, `/verify`, `/generate`
-- 🔜 AWS Deployment: In progress (target: production-ready endpoint)
+-  Docker Image: Built & tested
+-  API Integration: `/submit`, `/verify`, `/generate`
+-  AWS Deployment: In progress (target: production-ready endpoint)
 
 This design ensures **flexibility for developers**, **security against bot automation**, and **efficient scaling via cloud platforms**.
 
-## 🛠 Developer Portal & API Key Management
+## 🔍 Developer Portal & API Key Management
 
 To make our CAPTCHA system easily accessible to third-party developers, we built a **dedicated Developer Web Portal** that enables API key issuance, application management, and real-time usage tracking.
 
@@ -202,7 +202,7 @@ To make our CAPTCHA system easily accessible to third-party developers, we built
 
 ---
 
-### 🌐 Key Features
+### 🔍 Key Features
 
 1. **Secure Login**
    - Supports email/password login or social login via Google, Naver, and Kakao.
@@ -223,7 +223,7 @@ To make our CAPTCHA system easily accessible to third-party developers, we built
 
 ---
 
-### 🔑 Example Flow
+### 🔍 Example Flow
 
 1. User logs in with `your@email.com`
 2. Registers an app named `"my-application"`
